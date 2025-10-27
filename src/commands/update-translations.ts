@@ -88,7 +88,9 @@ const translateWithGPT = async (
         .map(([key, value]) => `${key}: ${value}`)
         .join('\n');
 
-    const prompt = `Traduis les phrases suivantes en ${targetLocale} sans changer les clés.\n\n${formatted}`;
+    const prompt = `Traduis le contenu suivant dans la locale "${targetLocale}" sans changer les clés.
+        Les clés correspondent à <fichierD'origine>:::<la.cle.dans.le.json>: <Le contenu à traduire>\n\n
+        ${formatted}`;
 
     const openai = new OpenAI({apiKey: process.env.OPENAI_API_KEY});
     const completion = await openai.chat.completions.create({
